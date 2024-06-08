@@ -30,16 +30,15 @@ fn partition(a: []u8, l: usize, r: usize) void {
     if (l >= r) return;
     var i = l + 1;
     var j = r;
-    const lwall = l;
 
     stdout.print("l = {d}, r = {d}\n", .{ l, r });
     try print_array(a[l .. r + 1]);
 
     while (i <= j) {
-        while ((i <= j) and (i < a.len) and (a[i] <= a[lwall])) {
+        while ((i <= j) and (i < a.len) and (a[i] <= a[l])) {
             i += 1;
         }
-        while ((j >= i) and (j > 0) and (a[j] >= a[lwall])) {
+        while ((j >= i) and (j > 0) and (a[j] >= a[l])) {
             j -= 1;
         }
         if (i < j) {
@@ -47,8 +46,8 @@ fn partition(a: []u8, l: usize, r: usize) void {
         }
     }
 
-    swap_numbers(&a[lwall], &a[j]);
-    if (j > 0) partition(a, lwall, j - 1);
+    swap_numbers(&a[l], &a[j]);
+    if (j > 0) partition(a, l, j - 1);
     partition(a, j + 1, r);
 }
 

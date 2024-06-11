@@ -69,8 +69,12 @@ inline fn swap_numbers(l: *u8, r: *u8) void {
 }
 
 fn assert_sorted(a: []u8, l: u8, r: u8) !void {
-    var i: usize = l;
-    while (i < r - 1) : (i += 1) {
+    // var i: usize = l;
+    // while (i < r - 1) {
+    //     try expect(a[i] <= a[i + 1]);
+    //     i += 1;
+    // }
+    for (l..r - 1) |i| {
         try expect(a[i] <= a[i + 1]);
     }
 }

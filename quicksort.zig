@@ -19,11 +19,7 @@ pub fn main() !void {
     partition(&numbers, 0, n - 1);
 
     try print_array(&numbers);
-
-    var i: usize = 0;
-    while (i < n - 1) : (i += 1) {
-        try expect(numbers[i] <= numbers[i + 1]);
-    }
+    try assert_sorted(&numbers, 0, numbers.len);
 }
 
 fn partition(a: []u8, l: usize, r: usize) void {
@@ -62,4 +58,10 @@ inline fn swap_numbers(l: *u8, r: *u8) void {
     const temp = l.*;
     l.* = r.*;
     r.* = temp;
+}
+
+fn assert_sorted(a: []u8, l: u8, r: u8) !void {
+    for (l..r - 1) |i| {
+        try expect(a[i] <= a[i + 1]);
+    }
 }
